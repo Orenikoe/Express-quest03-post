@@ -1,6 +1,5 @@
 const mysql = require('mysql2/promise');
-require('dotenv').config()
-
+require('dotenv').config();
 
 const connection = mysql.createPool({
 	host: process.env.DB_HOST, // address of the server
@@ -11,12 +10,12 @@ const connection = mysql.createPool({
 });
 
 connection
- .getConnection()
- .then(() => {
-   console.log("Can reach database");
- })
- .catch((err) => {
-   console.error(err);
- });
+	.getConnection()
+	.then(() => {
+		console.log('Can reach database');
+	})
+	.catch((err) => {
+		console.error(err);
+	});
 
 module.exports = connection;
