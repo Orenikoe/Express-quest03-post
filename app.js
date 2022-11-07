@@ -63,6 +63,18 @@ app.put('/users/:id', (req, res) => {
   });
 
 });
+app.delete('/users/:id', (req, res) => {
+  database
+  .query('DELETE FROM users WHERE id = ?', [req.params.id])
+  .then(([result]) => {
+    res.sendStatus(200).send(result);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.sendStatus(500);
+  });
+
+});
 
 app.listen(port, (err) => {
 	if (err) {
