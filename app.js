@@ -18,6 +18,18 @@ app.get('/users', (req, res) => {
 			res.status(500).send('Error adding the user');
 		});
 });
+app.get('/users/:id', (req, res) => {
+	const { id } = req.params;
+	database
+		.query(`SELECT * FROM users where id = ${id}`)
+		.then(([result]) => {
+			res.send(result[0]);
+		})
+		.catch((err) => {
+			console.error(err);
+			res.status(500).send('Error adding the user');
+		});
+});
 
 app.post('/users', async (req, res) => {
 	const username = req.body.username;
@@ -37,6 +49,18 @@ app.post('/users', async (req, res) => {
 			res.status(500).send('Error adding the user');
 		});
 
+
+});
+app.put('/users/:id', (req, res) => {
+  database
+  .query('UPDATE users SET ? WHERE id = ?', [req.body, req.params.id])
+  .then(([result]) => {
+    res.sendStatus(200).send(result);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.sendStatus(500);
+  });
 
 });
 
